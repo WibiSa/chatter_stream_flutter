@@ -1,8 +1,9 @@
-import 'package:chatter/helpers.dart';
+import 'package:chatter/app.dart';
 import 'package:chatter/pages/calls_page.dart';
 import 'package:chatter/pages/contacts_page.dart';
 import 'package:chatter/pages/messages_page.dart';
 import 'package:chatter/pages/notifications_page.dart';
+import 'package:chatter/screens/profile_screen.dart';
 import 'package:chatter/theme.dart';
 import 'package:chatter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,15 @@ class HomeScreen extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 24.0),
-            child: Avatar.small(url: Helpers.randomPictureUrl()),
+            child: Hero(
+              tag: 'hero-profile-picture',
+              child: Avatar.small(
+                url: context.currentUserImage,
+                onTap: () {
+                  Navigator.of(context).push(ProfileScreen.route);
+                },
+              ),
+            ),
           )
         ],
       ),
@@ -133,7 +142,17 @@ class _BottomNavigationBarState extends State<_BottomNavigationBar> {
                 child: GlowingActionButton(
                     color: AppColors.secondary,
                     icon: CupertinoIcons.add,
-                    onPressed: () {}),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => const Dialog(
+                          child: AspectRatio(
+                            aspectRatio: 8 / 7,
+                            child: ContactsPage(),
+                          ),
+                        ),
+                      );
+                    }),
               ),
               _NavigationBarItem(
                 index: 2,

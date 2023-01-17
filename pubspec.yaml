@@ -40,6 +40,9 @@ dependencies:
   faker: ^2.0.0
   google_fonts: ^2.1.0
   jiffy: ^5.0.0
+  logger: ^1.1.0
+  stream_chat_flutter_core: ^2.2.1
+
 
 dev_dependencies:
   flutter_test:
